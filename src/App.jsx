@@ -8,19 +8,25 @@ import Login from "./pages/Login";
 import PageNotFound from "./pages/pageNotFound";
 import Settings from "./pages/Settings";
 import Users from "./pages/Users";
+import AppLayout from "./ui/AppLayout";
+import GlobalStyles from "./styles/GlobalStyles";
 
 function App() {
   return (
     <BrowserRouter>
+      <GlobalStyles />
       <Routes>
-        <Route index element={<Navigate replace to='/dashboard' />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/bookings' element={<Bookings />} />
-        <Route path='/cabins' element={<Cabins />} />
-        <Route path='/account' element={<Account />} />
+        <Route element={<AppLayout />}>
+          <Route index element={<Navigate replace to='/dashboard' />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/bookings' element={<Bookings />} />
+          <Route path='/cabins' element={<Cabins />} />
+          <Route path='/account' element={<Account />} />
+          <Route path='/settings' element={<Settings />} />
+          <Route path='/users' element={<Users />} />
+        </Route>
+
         <Route path='/login' element={<Login />} />
-        <Route path='/settings' element={<Settings />} />
-        <Route path='/users' element={<Users />} />
         <Route path='/*' element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
