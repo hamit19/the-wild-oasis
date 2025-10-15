@@ -1,25 +1,29 @@
-import GlobalStyles from "./styles/GlobalStyles";
-import Button from "./ui/Button";
-import Heading from "./ui/Heading";
-import Raw from "./ui/Row";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
+import Dashboard from "./pages/Dashboard";
+import Bookings from "./pages/Bookings";
+import Cabins from "./pages/Cabins";
+import Account from "./pages/Account";
+import Login from "./pages/Login";
+import PageNotFound from "./pages/pageNotFound";
+import Settings from "./pages/Settings";
+import Users from "./pages/Users";
 
 function App() {
   return (
-    <>
-      <GlobalStyles />
-
-      <Raw>
-        <Heading as='h1'>Hello World!</Heading>
-        <Heading as='h2'>Hello World!</Heading>
-      </Raw>
-
-      <Raw type='vertical'>
-        <Heading as='h3'>Hello World!</Heading>
-        <Button variations='primary' sizes='large'>
-          Click on me
-        </Button>
-      </Raw>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Navigate replace to='/dashboard' />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/bookings' element={<Bookings />} />
+        <Route path='/cabins' element={<Cabins />} />
+        <Route path='/account' element={<Account />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/settings' element={<Settings />} />
+        <Route path='/users' element={<Users />} />
+        <Route path='/*' element={<PageNotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
