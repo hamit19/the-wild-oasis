@@ -10,6 +10,6 @@ const StyledInput = styled.input`
   transition: ease 0.1s all;
 `;
 
-export default function Input() {
-  return <StyledInput />;
+export default function Input({ ...props }) {
+  return <StyledInput {...props} />;
 }
