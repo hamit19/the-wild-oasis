@@ -10,7 +10,7 @@ function Cabins() {
         <span>Sort/Filter</span>
       </Row>
 
-      <Row>
+      <Row type='vertical'>
         <CabinTable />
       </Row>
     </Row>
