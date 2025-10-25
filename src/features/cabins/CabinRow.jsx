@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers";
+import { formatCurrency } from "../../utils/helpers";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteCabin } from "../../services/apiCabins";
+import toast from "react-hot-toast";
 
 const TableRow = styled.div`
   display: grid;
@@ -57,10 +58,12 @@ export default function CabinRow({ cabin }) {
   const { isPending, mutate } = useMutation({
     mutationFn: deleteCabin,
     onSuccess: () => {
+      toast.success("Cabin successfully deleted");
       queryClient.invalidateQueries({
         queryKey: "cabins",
       });
     },
+    onError: (err) => toast.error(err.message),
   });
 
   return (
