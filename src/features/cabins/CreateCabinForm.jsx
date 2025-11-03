@@ -12,8 +12,8 @@ import toast from "react-hot-toast";
 import FormRow from "./FormRow";
 
 function CreateCabinForm() {
-  const { register, handleSubmit, reset, formState, getFieldState } = useForm();
-  const { errors, name } = formState;
+  const { register, handleSubmit, reset, formState, getValues } = useForm();
+  const { errors } = formState;
   const queryClient = useQueryClient();
   const { isPending, mutate } = useMutation({
     mutationFn: createCabin,
@@ -26,10 +26,6 @@ function CreateCabinForm() {
       toast.error(error.message);
     },
   });
-
-  console.log("Hello!", errors);
-
-  console.log("Ffff", formState.name);
 
   function onSubmit(data) {
     if (!data) return;
@@ -57,6 +53,10 @@ function CreateCabinForm() {
           name='maxCapacity'
           {...register("maxCapacity", {
             required: "This field is required!",
+            min: {
+              value: 1,
+              message: "Capacity must be at least 1",
+            },
           })}
         />
       </FormRow>
@@ -68,6 +68,10 @@ function CreateCabinForm() {
           name='regularPrice'
           {...register("regularPrice", {
             required: "This field is required!",
+            min: {
+              value: 1,
+              message: "Price must be at least 1",
+            },
           })}
         />
       </FormRow>
@@ -80,6 +84,9 @@ function CreateCabinForm() {
           defaultValue={0}
           {...register("discount", {
             required: "This field is required!",
+            validate: (value) =>
+              value <= Number(getValues("regularPrice")) ||
+              "Discount must be less than regular price!",
           })}
         />
       </FormRow>
@@ -90,7 +97,12 @@ function CreateCabinForm() {
           id='description'
           name='description'
           defaultValue=''
-          {...register("description", { required: "This field is required!" })}
+          {...register("description", {
+            required: "This field is required!",
+            validate: (value) =>
+              value.length >= 10 ||
+              "Description must be at least 10 characters long!",
+          })}
         />
       </FormRow>
 
