@@ -44,18 +44,20 @@ export const editCabin = async (editedCabin) => {
 
   if (
     !editedCabin?.image?.startsWith?.(supabaseUrl) &&
-    editedCabin.image !== null
+    editedCabin.image?.[0]
   ) {
     imagePath = await uploadImage(editedCabin.image[0]);
   }
 
   const { data, error } = await supabase
     .from("cabins")
-    .update({ ...editedCabin, image: imagePath ? imagePath : editCabin.image })
+    .update({
+      ...editedCabin,
+      image: imagePath.length > 1 ? imagePath : editedCabin.image,
+    })
     .eq("id", id);
 
   if (error) throw new Error("The cabin was not edited!");
-
   return data;
 };
 
