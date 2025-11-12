@@ -23,13 +23,20 @@ export const deleteCabin = async (id) => {
 };
 
 export const createCabin = async (newCabin) => {
+  let imagePath = "";
+
   // 1.Upload image
-  const imagePath = await uploadImage(newCabin.image);
+  if (!newCabin?.image?.startsWith?.(supabaseUrl) && newCabin.image?.[0]) {
+    imagePath = await uploadImage(newCabin.image);
+  }
 
   // 2.Create Cabin
-  const { data, error } = await supabase
-    .from("cabins")
-    .insert([{ ...newCabin, image: imagePath }]);
+  const { data, error } = await supabase.from("cabins").insert([
+    {
+      ...newCabin,
+      image: imagePath ? imagePath : newCabin.image,
+    },
+  ]);
 
   if (error) {
     throw new Error("Could not add the new cabin!");
@@ -53,7 +60,7 @@ export const editCabin = async (editedCabin) => {
     .from("cabins")
     .update({
       ...editedCabin,
-      image: imagePath.length > 1 ? imagePath : editedCabin.image,
+      image: imagePath ? imagePath : editedCabin.image,
     })
     .eq("id", id);
 
