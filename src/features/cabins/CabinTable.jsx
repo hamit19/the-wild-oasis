@@ -5,6 +5,7 @@ import { useState } from "react";
 import Button from "../../ui/Button";
 import CreateCabinForm from "./CreateCabinForm";
 import useCabins from "./hooks/useCabins";
+import Row from "../../ui/Row";
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -41,21 +42,24 @@ export default function CabinTable() {
 
   return (
     <>
-      <Table role='table'>
-        <TableHeader role='row'>
-          <div></div>
-          <div>Cabin</div>
-          <div>Capacity</div>
-          <div>Price</div>
-          <div>Discount</div>
-        </TableHeader>
-        {cabins.map((cabin) => (
-          <CabinRow cabin={cabin} key={cabin.id} />
-        ))}
-      </Table>
-      <Button onClick={() => setShowForm(!showForm)}>Add new Cabin</Button>
+      <Row type='vertical'>
+        <Table role='table'>
+          <TableHeader role='row'>
+            <div></div>
+            <div>Cabin</div>
+            <div>Capacity</div>
+            <div>Price</div>
+            <div>Discount</div>
+          </TableHeader>
+          {cabins.map((cabin) => (
+            <CabinRow cabin={cabin} key={cabin.id} />
+          ))}
+        </Table>
 
-      {showForm && <CreateCabinForm />}
+        <Button onClick={() => setShowForm(!showForm)}>Add new Cabin</Button>
+
+        {showForm && <CreateCabinForm />}
+      </Row>
     </>
   );
 }
