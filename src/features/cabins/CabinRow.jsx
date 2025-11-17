@@ -57,8 +57,6 @@ export default function CabinRow({ cabin }) {
     description,
   } = cabin;
 
-  console.log(cabin);
-
   const { isDeleting, removeCabin } = useDeleteCabin();
   const { isCreating, createNewCabin } = useCreateCabin();
 
