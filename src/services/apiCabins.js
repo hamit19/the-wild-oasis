@@ -25,12 +25,12 @@ export const deleteCabin = async (id) => {
 export const createCabin = async (newCabin) => {
   let imagePath = "";
 
-  // 1.Upload image
-  if (!newCabin?.image?.startsWith?.(supabaseUrl) && newCabin.image?.[0]) {
+  //1.Upload image
+  if (!newCabin?.image?.startsWith?.(supabaseUrl) && newCabin?.image) {
     imagePath = await uploadImage(newCabin.image);
   }
 
-  // 2.Create Cabin
+  //2.Create Cabin
   const { data, error } = await supabase.from("cabins").insert([
     {
       ...newCabin,
@@ -83,6 +83,5 @@ async function uploadImage(image) {
   if (storageError) {
     throw new Error("The image was not uploaded!");
   }
-
   return imagePath;
 }
