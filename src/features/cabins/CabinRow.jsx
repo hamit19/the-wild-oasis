@@ -72,46 +72,44 @@ export default function CabinRow({ cabin }) {
   };
 
   return (
-    <>
-      <TableRow role='row'>
-        <Img src={image} />
-        <Cabin>{name}</Cabin>
-        <div> Fits up to {maxCapacity} Guests</div>
-        <Price>{formatCurrency(price)}</Price>
-        <Discount>{discount ? formatCurrency(discount) : "---"}</Discount>
-        <div>
-          <Modal>
-            <Modal.Open opens='edit'>
-              <button>
-                <HiPencil />
-              </button>
-            </Modal.Open>
-            <Modal.Window name='edit'>
-              <CreateCabinForm cabinToEdit={cabin} />
-            </Modal.Window>
-          </Modal>
+    <TableRow role='row'>
+      <Img src={image} />
+      <Cabin>{name}</Cabin>
+      <div> Fits up to {maxCapacity} Guests</div>
+      <Price>{formatCurrency(price)}</Price>
+      <Discount>{discount ? formatCurrency(discount) : "---"}</Discount>
+      <div>
+        <Modal>
+          <Modal.Open opens='edit'>
+            <button>
+              <HiPencil />
+            </button>
+          </Modal.Open>
+          <Modal.Window name='edit'>
+            <CreateCabinForm cabinToEdit={cabin} />
+          </Modal.Window>
+        </Modal>
 
-          <button disabled={isCreating} onClick={handleDuplicate}>
-            <HiDuplicate />
-          </button>
+        <button disabled={isCreating} onClick={handleDuplicate}>
+          <HiDuplicate />
+        </button>
 
-          <Modal>
-            <Modal.Open opens='confirm-delete'>
-              <button disabled={isDeleting}>
-                <HiTrash />
-              </button>
-            </Modal.Open>
+        <Modal>
+          <Modal.Open opens='confirm-delete'>
+            <button disabled={isDeleting}>
+              <HiTrash />
+            </button>
+          </Modal.Open>
 
-            <Modal.Window name='confirm-delete'>
-              <ConfirmDelete
-                onConfirm={() => removeCabin(cabinId)}
-                resourceName={`"${name}"`}
-              />
-            </Modal.Window>
-          </Modal>
-        </div>
-      </TableRow>
-    </>
+          <Modal.Window name='confirm-delete'>
+            <ConfirmDelete
+              onConfirm={() => removeCabin(cabinId)}
+              resourceName={`"${name}"`}
+            />
+          </Modal.Window>
+        </Modal>
+      </div>
+    </TableRow>
   );
 }
 
