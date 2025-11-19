@@ -7,6 +7,7 @@ import { HiDuplicate, HiPencil, HiTrash } from "react-icons/hi";
 import useCreateCabin from "./hooks/useCreateCabin";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
+import Menus from "../../ui/Menus";
 
 const TableRow = styled.div`
   display: grid;
@@ -108,6 +109,20 @@ export default function CabinRow({ cabin }) {
             />
           </Modal.Window>
         </Modal>
+
+        <Menus.Menu>
+          <Menus.Toggle id={cabinId} />
+          <Menus.List id={cabinId}>
+            <Menus.Button
+              icon={<HiDuplicate />}
+              disabled={isCreating}
+              onClick={handleDuplicate}>
+              Duplicate
+            </Menus.Button>
+            <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+            <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+          </Menus.List>
+        </Menus.Menu>
       </div>
     </TableRow>
   );
