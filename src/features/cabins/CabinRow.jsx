@@ -81,48 +81,37 @@ export default function CabinRow({ cabin }) {
       <Discount>{discount ? formatCurrency(discount) : "---"}</Discount>
       <div>
         <Modal>
-          <Modal.Open opens='edit'>
-            <button>
-              <HiPencil />
-            </button>
-          </Modal.Open>
-          <Modal.Window name='edit'>
-            <CreateCabinForm cabinToEdit={cabin} />
-          </Modal.Window>
+          <Menus.Menu>
+            <Menus.Toggle id={cabinId} />
+            <Menus.List id={cabinId}>
+              <Menus.Button
+                icon={<HiDuplicate />}
+                disabled={isCreating}
+                onClick={handleDuplicate}>
+                Duplicate
+              </Menus.Button>
+
+              <Modal.Open opens='edit'>
+                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+              </Modal.Open>
+
+              <Modal.Open opens='confirm-delete'>
+                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+              </Modal.Open>
+            </Menus.List>
+
+            <Modal.Window name='edit'>
+              <CreateCabinForm cabinToEdit={cabin} />
+            </Modal.Window>
+
+            <Modal.Window name='confirm-delete'>
+              <ConfirmDelete
+                onConfirm={() => removeCabin(cabinId)}
+                resourceName={`"${name}"`}
+              />
+            </Modal.Window>
+          </Menus.Menu>
         </Modal>
-
-        <button disabled={isCreating} onClick={handleDuplicate}>
-          <HiDuplicate />
-        </button>
-
-        <Modal>
-          <Modal.Open opens='confirm-delete'>
-            <button disabled={isDeleting}>
-              <HiTrash />
-            </button>
-          </Modal.Open>
-
-          <Modal.Window name='confirm-delete'>
-            <ConfirmDelete
-              onConfirm={() => removeCabin(cabinId)}
-              resourceName={`"${name}"`}
-            />
-          </Modal.Window>
-        </Modal>
-
-        <Menus.Menu>
-          <Menus.Toggle id={cabinId} />
-          <Menus.List id={cabinId}>
-            <Menus.Button
-              icon={<HiDuplicate />}
-              disabled={isCreating}
-              onClick={handleDuplicate}>
-              Duplicate
-            </Menus.Button>
-            <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
-            <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
-          </Menus.List>
-        </Menus.Menu>
       </div>
     </TableRow>
   );
