@@ -13,6 +13,7 @@ export default function CabinTable() {
 
   if (error) return <div>Error: {error.message}</div>;
 
+  // 1) Filtering cabins based on discount status
   const filteredValue = searchParams.get("discount") || "all";
 
   let filteredCabins;
@@ -24,6 +25,16 @@ export default function CabinTable() {
 
   if (filteredValue === "with-discount")
     filteredCabins = cabins.filter((cabin) => cabin.discount > 0);
+
+  // 2) Sorting cabins based on selected criteria
+
+  const sortBy = searchParams.get("sortBy") || "startDate-asc";
+
+  const [filed, direction] = sortBy.split("-");
+  const modifier = direction === "asc" ? 1 : -1;
+  let sortedCabins = filteredCabins.sort(
+    (a, b) => (a[filed] - b[filed]) * modifier
+  );
 
   return (
     <Menus>
@@ -37,7 +48,7 @@ export default function CabinTable() {
         </Table.Header>
         <Table.Body
           // data={cabins}
-          data={filteredCabins}
+          data={sortedCabins}
           render={(cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
         />
       </Table>
