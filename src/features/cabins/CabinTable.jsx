@@ -3,14 +3,17 @@ import CabinRow from "./CabinRow";
 import useCabins from "./hooks/useCabins";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
+import Empty from "../../ui/Empty";
 import { useSearchParams } from "react-router-dom";
 
 export default function CabinTable() {
   const { isLoading, error, cabins } = useCabins();
   const [searchParams] = useSearchParams();
-  if (isLoading) return <Spinner />;
 
+  if (isLoading) return <Spinner />;
   if (error) return <div>Error: {error.message}</div>;
+
+  if (!cabins.length) return <Empty resourceName={"Cabins"} />;
 
   // 1) Filtering cabins based on discount status
   const filteredValue = searchParams.get("discount") || "all";
@@ -26,7 +29,6 @@ export default function CabinTable() {
     filteredCabins = cabins.filter((cabin) => cabin.discount > 0);
 
   // 2) Sorting cabins based on selected criteria
-
   const sortBy = searchParams.get("sortBy") || "startDate-asc";
 
   const [filed, direction] = sortBy.split("-");
