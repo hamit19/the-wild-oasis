@@ -19,7 +19,7 @@ const HeadingGroup = styled.div`
 `;
 
 function BookingDetail() {
-  const { booking, isLoading, error, bookingId } = useBooking();
+  const { booking, isLoadingBooking, error, bookingId } = useBooking();
   const status = booking?.status;
 
   const moveBack = useMoveBack();
@@ -30,7 +30,7 @@ function BookingDetail() {
     "checked-out": "silver",
   };
 
-  if (isLoading) return <Spinner />;
+  if (isLoadingBooking) return <Spinner />;
 
   if (error) return <h2>Something went wrong! please reload the page.</h2>;
 

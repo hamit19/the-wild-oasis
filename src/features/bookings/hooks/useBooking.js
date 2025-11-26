@@ -7,7 +7,7 @@ function useBooking() {
 
   const {
     data: booking,
-    isLoading,
+    isLoading: isLoadingBooking,
     error,
   } = useQuery({
     queryKey: ["booking", bookingId],
@@ -15,7 +15,7 @@ function useBooking() {
     retry: false,
   });
 
-  return { booking, isLoading, error, bookingId };
+  return { booking, isLoadingBooking, error, bookingId };
 }
 
 export default useBooking;
