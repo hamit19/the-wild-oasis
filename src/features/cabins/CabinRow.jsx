@@ -108,6 +108,7 @@ export default function CabinRow({ cabin }) {
               <ConfirmDelete
                 onConfirm={() => removeCabin(cabinId)}
                 resourceName={`"${name}"`}
+                disabled={isDeleting}
               />
             </Modal.Window>
           </Menus.Menu>
