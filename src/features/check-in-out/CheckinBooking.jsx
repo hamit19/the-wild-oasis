@@ -55,9 +55,18 @@ function CheckinBooking() {
   function handleCheckin() {
     if (!confirmPaid) return;
 
-    //? ===> add the functionality to update data with new data included breakfast!
-
-    checkinBooking(bookingId);
+    if (addBreakfast) {
+      checkinBooking({
+        bookingId,
+        breakfast: {
+          hasBreakfast: true,
+          extrasPrice: breakfastPrice,
+          totalPrice: totalPrice + breakfastPrice,
+        },
+      });
+    } else {
+      checkinBooking({ bookingId, breakfast: {} });
+    }
   }
 
   return (
@@ -88,7 +97,7 @@ function CheckinBooking() {
           checked={confirmPaid}
           onChange={() => setConfirmPaid(!confirmPaid)}
           id='confirm-paid'
-          disabled={booking.isPaid}>
+          disabled={booking.isPaid && confirmPaid}>
           I confirm that {guests.fullName} has paid the total amount of{" "}
           {!addBreakfast
             ? formatCurrency(totalPrice)
