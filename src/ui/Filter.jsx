@@ -41,6 +41,9 @@ export default function Filter({ filterFiled, options }) {
 
   function handleClick(value) {
     searchParams.set(filterFiled, value);
+
+    if (searchParams.get("page")) searchParams.set("page", 1);
+
     setSearchParams(searchParams);
   }
 
