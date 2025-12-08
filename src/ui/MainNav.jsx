@@ -77,7 +77,7 @@ export default function MainNav() {
         <li>
           <StyledNavLink to='/users'>
             <HiOutlineUsers />
-            <span>Home</span>
+            <span>Users</span>
           </StyledNavLink>
         </li>
         <li>
