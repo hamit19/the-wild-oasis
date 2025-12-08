@@ -3,22 +3,33 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
+import useSignup from "./hooks/useSignup";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 // Email regex: /\S+@\S+\.\S+/
 
 function SignupForm() {
-  const { register, getValues, handleSubmit, formState } = useForm();
+  const { register, getValues, handleSubmit, formState, reset } = useForm();
 
   const { errors } = formState;
 
-  function onSubmit(data) {
-    console.log(data);
+  const { signup, isSigningUp } = useSignup();
+
+  function onSubmit({ fullName, email, password }) {
+    if (!errors?.root?.type)
+      signup(
+        { email, password, fullName },
+        {
+          onSettled: () => reset(),
+        }
+      );
   }
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow label='Full name' error={errors}>
         <Input
+          disabled={isSigningUp}
           type='text'
           id='fullName'
           name='fullName'
@@ -28,6 +39,7 @@ function SignupForm() {
 
       <FormRow label='Email address' error={errors}>
         <Input
+          disabled={isSigningUp}
           type='email'
           id='email'
           name='email'
@@ -43,6 +55,7 @@ function SignupForm() {
 
       <FormRow label='Password (min 8 characters)' error={errors}>
         <Input
+          disabled={isSigningUp}
           type='password'
           id='password'
           name='password'
@@ -58,6 +71,7 @@ function SignupForm() {
 
       <FormRow label='Repeat password' error={errors}>
         <Input
+          disabled={isSigningUp}
           type='password'
           id='passwordConfirm'
           name='passwordConfirm'
@@ -71,10 +85,12 @@ function SignupForm() {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variations='secondary' type='reset'>
+        <Button disabled={isSigningUp} variations='secondary' type='reset'>
           Cancel
         </Button>
-        <Button>Create new user</Button>
+        <Button disabled={isSigningUp}>
+          {!isSigningUp ? "Create new user" : <SpinnerMini />}
+        </Button>
       </FormRow>
     </Form>
   );
