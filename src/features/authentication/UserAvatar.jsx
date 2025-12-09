@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import useUser from "./hooks/useUser";
-import { HiUserCircle } from "react-icons/hi2";
 
 const StyledUserAvatar = styled.div`
   display: flex;
