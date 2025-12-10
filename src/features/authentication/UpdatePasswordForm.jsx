@@ -4,7 +4,7 @@ import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 
-import { useUpdateUser } from "./useUpdateUser";
+import useUpdateUser from "./hooks/useUpdateUser";
 
 function UpdatePasswordForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
@@ -13,19 +13,16 @@ function UpdatePasswordForm() {
   const { updateUser, isUpdating } = useUpdateUser();
 
   function onSubmit({ password }) {
-    updateUser({ password }, { onSuccess: reset });
+    updateUser({ password }, { onSuccess: reset() });
   }
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormRow
-        label="Password (min 8 characters)"
-        error={errors?.password?.message}
-      >
+      <FormRow label='Password (min 8 characters)' error={errors}>
         <Input
-          type="password"
-          id="password"
-          autoComplete="current-password"
+          type='password'
+          id='password'
+          autoComplete='current-password'
           disabled={isUpdating}
           {...register("password", {
             required: "This field is required",
@@ -37,14 +34,11 @@ function UpdatePasswordForm() {
         />
       </FormRow>
 
-      <FormRow
-        label="Confirm password"
-        error={errors?.passwordConfirm?.message}
-      >
+      <FormRow label='Confirm password' error={errors}>
         <Input
-          type="password"
-          autoComplete="new-password"
-          id="passwordConfirm"
+          type='password'
+          autoComplete='new-password'
+          id='passwordConfirm'
           disabled={isUpdating}
           {...register("passwordConfirm", {
             required: "This field is required",
@@ -54,7 +48,7 @@ function UpdatePasswordForm() {
         />
       </FormRow>
       <FormRow>
-        <Button onClick={reset} type="reset" variation="secondary">
+        <Button onClick={reset} type='reset' variations='secondary'>
           Cancel
         </Button>
         <Button disabled={isUpdating}>Update password</Button>
