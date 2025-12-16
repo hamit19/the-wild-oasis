@@ -5,14 +5,13 @@ import Empty from "../../ui/Empty";
 import useBookings from "./hooks/useBookings";
 import Spinner from "../../ui/Spinner";
 import Pagination from "../../ui/Pagination";
-import Modal from "../../ui/Modal";
 
 function BookingTable() {
-  const { bookings, isLoading, error, count } = useBookings();
+  const { bookings, isLoading, count } = useBookings();
 
   if (isLoading) return <Spinner />;
 
-  if (error) return <h2>Something went wrong! reload the page!</h2>;
+  // if (error) return <h2>Something went wrong! reload the page!</h2>;
 
   if (!bookings.length) return <Empty resource='bookings' />;
 
