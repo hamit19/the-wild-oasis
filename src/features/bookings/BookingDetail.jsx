@@ -16,6 +16,7 @@ import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import useDeleteBooking from "./hooks/useDeleteBooking";
 import { useNavigate } from "react-router-dom";
+import Empty from "../../ui/Empty";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -39,6 +40,8 @@ function BookingDetail() {
   };
 
   if (isLoadingBooking) return <Spinner />;
+
+  if (!booking) return <Empty resourceName={"booking"} />;
 
   if (error) return <h2>Something went wrong! please reload the page.</h2>;
 
