@@ -284,6 +284,10 @@ This project is open source and available under the MIT License.
 
 For questions or inquiries about this project, feel free to reach out!
 
+[Portfolio](https://yourportfolio.com) | [LinkedIn](https://www.linkedin.com/in/hamid-hassani-a431b0244)
+
 ---
+
+**Built with ❤️ by Hamid Hassani**
 
 **Happy Coding! 🎉**
