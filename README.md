@@ -2,7 +2,7 @@
 
 A modern, full-featured hotel and cabin management application built with React. This comprehensive platform enables hotel staff to efficiently manage bookings, cabins, guest check-ins/check-outs, and view detailed analytics with an intuitive admin dashboard.
 
-**Live Demo:** [https://the-wild-oasis-hamid.netlify.app/login](https://the-wild-oasis-hamid.netlify.app/login)
+**Live Demo:** [https://the-wild-oasis-hamid.netlify.app/login](https://the-wild-oasis-hamid.netlify.app)
 
 
 ---
