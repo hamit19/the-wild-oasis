@@ -12,24 +12,22 @@ A modern, full-featured hotel and cabin management application built with React.
 > Add screenshots here to showcase your application
 
 ### Dashboard View
-```
+
 ![Dashboard Image](src/assets/screenshots/dashboard.png)
-```
 
 ### Bookings Management
-```
+
 ![Booking Management Image](src/assets/screenshots/bookings.png)
-```
+
 
 ### Cabin Management
-```
+
 ![Cabin Management Image](src/assets/screenshots/cabins.png)
-```
+
 
 ### Check-in/Check-out
-```
+
 ![ Check-in/Check-out Image](src/assets/screenshots/checkin.png)
-```
 
 ---
 
